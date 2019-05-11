@@ -1,0 +1,19 @@
+body,html,div,ul,li,p,h1,h2,h3,h4,h5,h6,header,footer,section,nav,article,aside,main,legend,figure,dl,dt,dd{margin:0;padding:0;}
+body,html{min-height:100%;}
+body{font-family:$font;font-weight:200;font-size:15px;color:#333;}
+input,select,textarea,img,button,i,svg{display:inline-block;vertical-align:middle;}
+input[type="text"],input[type="password"]{@extend %input;height:40px}
+label{cursor:pointer;}
+textarea{@extend %input;width:calc(100% - 22px);}
+ul,li{list-style:none;}
+a{text-decoration:none;color:inherit}
+a:hover,
+a:active,
+a:link{text-decoration:none;color:inherit}
+legend{border:none;}
+fieldset{border:none}
+h1,h2,h3,h4,h5,h6,strong{font-weight:200;}
+%input{border:1px solid #bebebe;background:#FFF;padding:0 10px;font-size:15px;font-family:inherit;}
+::-webkit-scrollbar{background-color: #fff;width:.4em;height:.4em;}
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb{background:fade-out(#06F, 0.5);border-radius:10px}

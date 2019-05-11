@@ -1,0 +1,59 @@
+// function
+@function per ($size, $ratio:1200px) {
+	@return ($size / $ratio) * 100%;
+}
+
+@function vw ($size, $ratio:1200px) {
+	@return ($size / $ratio) * 100vw;
+}
+
+// mixin
+@mixin circle ($size, $bg:#fff, $color:#fff, $border:none) {
+	width:$size;
+	height:$size;
+	border-radius:$size;
+	background:$bg;
+	color:$color;
+	border:$border;
+	display:inline-block;
+	line-height:$size;
+	text-align:center;
+}
+@mixin clear () {
+	&:after{content:"";display:block;clear:both;}
+}
+@mixin pc {
+	@media (min-width:1200px) {
+		@content;
+	}
+}
+@mixin tablet {
+	@media (max-width:1199px) {
+		@content;
+	}
+}
+@mixin only-tablet {
+	@media (min-width:768px) and (max-width:1199px) {
+		@content;
+	}
+}
+@mixin mobile {
+	@media (max-width:767px) {
+		@content;
+	}
+}
+
+// color
+$color-blue:#4894db;
+$color-indigo:#1b2655;
+$color-darkblue:#3f69a1;
+$color-greyblue:#3d485c;
+$color-red:#db4853;
+$color-grey:#f6f8fa;
+$color-google:#cc3731;
+$color-naver:#1dc800;
+$color-facebook:#3b5999;
+$color-kakao:#ffeb00;
+
+// font
+$font:-apple-system,BlinkMacSystemFont,Noto Sans KR,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif,Arial,Verdana;
