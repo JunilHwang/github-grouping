@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 import { inject, observer } from 'mobx-react';
 import { IChatStore, Message } from 'stores/ChatStore';
 import { getToday } from 'Utils'
@@ -11,11 +11,28 @@ type Props = {
 @inject('chatStore', 'userStore')
 @observer
 export default class ChattingList extends Component<Props> {
+  private chatList: React.RefObject<HTMLElement> = React.createRef()
+  componentDidUpdate () {
+    const target = this.chatList.current
+    if (target) {
+      const { scrollHeight: sh, scrollTop: st, clientHeight: ch} = target
+      if (sh - st - ch < 500) this.scrollSet()
+    }
+  }
+  componentDidMount() {
+    this.scrollSet()
+  }
+  scrollSet() {
+    const target = this.chatList.current
+    if (target) {
+      target.scrollTo(0, target.scrollHeight)
+    }
+  }
   render () {
     const { list } = this.props.chatStore!
     const { user } = this.props.userStore!
     return (
-      <section className="chat-list">
+      <section className="chat-list" ref={this.chatList}>
         {list.map(({writer, msg, reg_date}: Message, k: number) => (
           <article key={k} className={`chat-list__article ${(user.id === writer.id ? 'me' : 'other')}`}>
             <header className="chat-list__writer">

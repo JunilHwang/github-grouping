@@ -12,9 +12,10 @@ export default class ChattingForm extends Component<Props> {
   chatSubmit (e: any) {
     e.preventDefault()
     const frm = e.target
+    const msg = frm.msg.value
+    if ( msg.length === 0 ) return
     const { post } = this.props.chatStore!
     const { user: writer } = this.props.userStore!
-    const msg = frm.msg.value
     const reg_date = +new Date()
     post({ writer, msg, reg_date })
     frm.reset()
