@@ -1,0 +1,7 @@
+{
+  "client_id": "f165a57eb343d629149c",
+  "client_secret": "be5787d24f2e5f00da41423851a6d07e275112ac",
+  "redirect_uri": "http://localhost:8080",
+  "state": "junilhwang",
+  "scope": "user:email"
+}

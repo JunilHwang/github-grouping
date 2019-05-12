@@ -14,6 +14,13 @@
   .only-tablet{display:none;}
 }
 
+/* login */
+.login-wrap{position:fixed;left:0;right:0;top:0;bottom:0;display:flex;justify-content:center;align-items:center;
+  .login-wrap__title{font-size:35px;margin-bottom:20px;}
+  .login-wrap__button{width:300px;padding:10px 0;background:$color-github;color:#fff;border-radius:3px;font-size:19px;display:flex;justify-content:center;align-items:center;margin:0 auto 5px;
+    span{margin-left:5px;}
+  }
+}
 
 
 /* input */
@@ -63,7 +70,6 @@ a.btn{text-decoration:none;text-align:center;}
   &.main{background:$color-blue;}
   &.point{background:$color-naver;}
   &.delete{background:$color-red;}
-  &.join{background:$color-blue-darken-10;}
   &.auto{background:#999;}
   &.default{background:#777;}
   &.complete{background:$color-naver}
