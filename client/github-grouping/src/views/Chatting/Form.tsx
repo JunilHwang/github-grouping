@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import autobind from 'autobind-decorator';
-import { IChatStore } from 'stores/ChatStore';
+import { Message } from 'stores/ChatStore';
 import { inject, observer } from 'mobx-react';
 import { IUserStore } from 'stores/UserStore';
+import { socketEmit } from 'Utils/socket';
 
-type Props = { chatStore?: IChatStore, userStore?: IUserStore }
-@inject('chatStore', 'userStore')
+type Props = { userStore?: IUserStore }
+@inject('userStore')
 @observer
 @autobind
 export default class ChattingForm extends Component<Props> {
@@ -14,10 +15,9 @@ export default class ChattingForm extends Component<Props> {
     const frm = e.target
     const msg = frm.msg.value
     if ( msg.length === 0 ) return
-    const { post } = this.props.chatStore!
     const { user: writer } = this.props.userStore!
     const reg_date = +new Date()
-    post({ writer, msg, reg_date })
+    socketEmit('chat', { writer, msg, reg_date } as Message)
     frm.reset()
     frm.msg.focus()
   }

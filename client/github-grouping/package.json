@@ -8,6 +8,7 @@
     "@types/react": "16.8.17",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.3",
+    "@types/socket.io-client": "^1.4.32",
     "autobind-decorator": "^2.4.0",
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",

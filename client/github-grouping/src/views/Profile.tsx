@@ -2,14 +2,29 @@ import React, { Component } from 'react'
 import { IUserStore } from 'stores/UserStore'
 import { observer, inject } from 'mobx-react'
 import { FaSignOutAlt } from 'react-icons/fa'
+import { socketOn, socketEmit } from 'Utils/socket';
 
 type Props = {
   userStore?: IUserStore
 }
 
+type State = {
+  count: number
+}
+
 @inject('userStore')
 @observer
-export default class Profile extends Component<Props> {
+export default class Profile extends Component<Props, State> {
+  constructor (props: Props) {
+    super(props)
+    this.state = { count: 0 }
+  }
+  componentDidMount () {
+    socketEmit('inter', null)
+    socketOn('inter', (count: number) => {
+      this.setState({ count })
+    })
+  }
   render () {
     const { user, logout } = this.props.userStore!
     return (
@@ -25,6 +40,7 @@ export default class Profile extends Component<Props> {
           <p className="profile__bio">{user.bio}</p>
         </div>
         <nav className="nav">
+          <span className="nav__connected">접속자 : {this.state.count}명</span>
           <a className="nav__logout" href="#!" onClick={logout}><FaSignOutAlt /></a>
         </nav>
       </header>
