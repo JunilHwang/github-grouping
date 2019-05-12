@@ -14,15 +14,6 @@
   .only-tablet{display:none;}
 }
 
-/* login */
-.login-wrap{position:fixed;left:0;right:0;top:0;bottom:0;display:flex;justify-content:center;align-items:center;
-  .login-wrap__title{font-size:35px;margin-bottom:20px;}
-  .login-wrap__button{width:300px;padding:10px 0;background:$color-github;color:#fff;border-radius:3px;font-size:19px;display:flex;justify-content:center;align-items:center;margin:0 auto 5px;
-    span{margin-left:5px;}
-  }
-}
-
-
 /* input */
 ::placeholder{color:#aaa;}
 .input-label{position:relative;display:block;$size:50px;
@@ -112,5 +103,50 @@ span.middle{display:inline-block;vertical-align:middle;width:0;height:100%;
   }
   a.close{position:absolute;right:0;top:0;width:40px;height:40px;display:block;text-align:center;line-height:40px;background:fade-out(#000,.5);color:#fff;z-index:10;text-decoration:none;transition:.3s;
     &:hover{background:fade-out(#000, .6)}
+  }
+}
+
+/* login */
+.login-wrap{position:fixed;left:0;right:0;top:0;bottom:0;display:flex;justify-content:center;align-items:center;
+  .login-wrap__title{font-size:35px;margin-bottom:20px;}
+  .login-wrap__button{width:300px;padding:10px 0;background:$color-github;color:#fff;border-radius:3px;font-size:19px;display:flex;justify-content:center;align-items:center;margin:0 auto 5px;
+    span{margin-left:5px;}
+  }
+}
+
+/* site-wrap */
+.site-wrap{width:1000px;margin:20px auto;position:fixed;top:0;bottom:0;left:0;right:0;overflow:hidden;border-radius:3px;}
+
+/* profile */
+.profile{display:flex;align-items:center;background:$color-github;padding:10px 30px;position:relative;
+  &__thumbnail{
+    &--wrap{width:60px;height:60px;border-radius:60px;position:relative;overflow:hidden;;}
+    &--image{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;}
+  }
+  &__header{margin-bottom:5px;}
+  &__info{margin-left:20px;color:#fff;}
+  &__name{font-size:17px;font-weight:400;}
+  &__email{font-size:13px;color:#ddd;display:inline-block;margin-left:5px;}
+  &__bio{font-size:13px;}
+}
+
+/* nav */
+.nav{position:absolute;right:30px;color:#fff;top:0;bottom:0;display:flex;align-items:center;
+  &__logout{color:#aaa;font-size:20px;transition:.3s;}
+}
+
+/* chat */
+.chat{
+  &-wrap{height:calc(100% - 80px);}
+  &-list{height:calc(100% - 80px);background:#f5f5f5;}
+  &-form{height:80px;
+    &__input{height:50px !important;box-sizing:border-box;width:calc(100% - 100px);
+      &:focus{outline:1px solid #000;;}
+    }
+    &__submit{box-sizing:border-box;width:100px;height:50px;background:$color-github;color:#fff;border:none;font-size:17px;cursor:pointer;transition:.3s;
+      &:focus,
+      &:hover,
+      &:active{background:#09F;outline:none;}
+    }
   }
 }

@@ -6,6 +6,8 @@ import { inject, observer } from 'mobx-react'
 import { IUserStore } from 'stores/UserStore'
 import autobind from 'autobind-decorator'
 import Profile from './Profile'
+import ChattingList from './Chatting/List'
+import ChattingForm from './Chatting/Form'
 
 type Props = {
   match: any
@@ -53,6 +55,10 @@ export default class Home extends Component<Props> {
     return (
       <section className="site-wrap">
         <Profile />
+        <main className="chat-wrap">
+          <ChattingList />
+          <ChattingForm />
+        </main>
       </section>
     )
   }
