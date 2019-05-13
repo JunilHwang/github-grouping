@@ -8,6 +8,9 @@ import autobind from 'autobind-decorator'
 import Profile from './Profile'
 import ChattingList from './Chatting/List'
 import ChattingForm from './Chatting/Form'
+import { Switch, Route } from 'react-router';
+import Grouping from './Grouping';
+import Guide from './Guide';
 
 type Props = {
   match: any
@@ -48,13 +51,21 @@ export default class Home extends Component<Props> {
     )
   }
   HomeComponent () {
+    const Chatting = (props: {}) => (
+      <main className="chat-wrap">
+        <ChattingList {...props} />
+        <ChattingForm {...props} />
+      </main>
+    )
     return (
       <section className="site-wrap">
         <Profile />
-        <main className="chat-wrap">
-          <ChattingList />
-          <ChattingForm />
-        </main>
+        <Switch>
+          <Route path="/group" component={Grouping} />
+          <Route path="/guide/:step" component={Guide} />
+          <Route exact path="/chat/:id" component={Chatting} />
+          <Route exact path="/" component={Chatting} />
+        </Switch>
       </section>
     )
   }

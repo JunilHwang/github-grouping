@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { FaSignOutAlt } from 'react-icons/fa'
 import { socketOn, socketEmit } from 'Utils/socket';
 import { ILayerStore } from 'stores/LayerStore';
+import { Link } from 'react-router-dom';
 
 type Props = {
   userStore?: IUserStore
@@ -13,9 +14,6 @@ type Props = {
 @inject('userStore', 'layerStore')
 @observer
 export default class Profile extends Component<Props> {
-  constructor (props: Props) {
-    super(props)
-  }
   componentDidMount () {
     const { user, setUserList } = this.props.userStore!
     socketEmit('out.user', user.id)
@@ -38,7 +36,8 @@ export default class Profile extends Component<Props> {
           <p className="profile__bio">{user.bio}</p>
         </div>
         <nav className="nav">
-          { user.name === 'JunilHwang' ? <a href="#!" className="nav__group--button">그룹핑</a> : null }
+          <Link to="/" className="nav__button">채팅</Link>
+          { user.name === 'JunilHwang' ? <Link to="/group" className="nav__button">그룹핑</Link> : null }
           <span className="nav__connected" onClick={(e: any) => setLayer(e, 'UserList')}>접속자 : {userList.length}명</span>
           <a className="nav__logout" href="#!" onClick={logout}><FaSignOutAlt /></a>
         </nav>

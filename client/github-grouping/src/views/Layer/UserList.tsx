@@ -9,9 +9,6 @@ type Props = {
 @inject('userStore')
 @observer
 export default class Layer extends Component<Props> {
-  constructor (props: any) {
-    super(props)
-  }
   componentDidMount () {
     socketEmit('get.user')
     socketOn('get.user', (list: any[]) => {

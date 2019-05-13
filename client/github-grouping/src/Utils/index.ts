@@ -37,3 +37,23 @@ export const getToday = (ms: number) => {
   const computed = ms - (+new Date())
   return moment(ms).format(computed > d ? 'MM-DD HH:mm' : 'HH:mm')
 }
+
+
+export const shuffle = (arr: any[]) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  const newArr: any[] = []
+  let i = -1
+  arr.forEach((v, k) => {
+    if ( k % 4 === 0 ) {
+      newArr.push([])
+      i++
+    }
+    newArr[i].push(v)
+  })
+  return newArr
+}
