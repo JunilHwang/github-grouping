@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import { IUserStore } from 'stores/UserStore'
 import { observer, inject } from 'mobx-react'
 import { FaSignOutAlt } from 'react-icons/fa'
-import { socketOn, socketEmit } from 'Utils/socket';
+import { socketOn } from 'Utils/socket';
+import { ILayerStore } from 'stores/LayerStore';
 
 type Props = {
   userStore?: IUserStore
+  layerStore?: ILayerStore
 }
 
 type State = {
   count: number
 }
 
-@inject('userStore')
+@inject('userStore', 'layerStore')
 @observer
 export default class Profile extends Component<Props, State> {
   constructor (props: Props) {
@@ -20,13 +22,13 @@ export default class Profile extends Component<Props, State> {
     this.state = { count: 0 }
   }
   componentDidMount () {
-    socketEmit('inter', null)
     socketOn('inter', (count: number) => {
       this.setState({ count })
     })
   }
   render () {
     const { user, logout } = this.props.userStore!
+    const { setLayer } = this.props.layerStore!
     return (
       <header className="profile">
         <figure className="profile__thumbnail--wrap">
@@ -40,7 +42,8 @@ export default class Profile extends Component<Props, State> {
           <p className="profile__bio">{user.bio}</p>
         </div>
         <nav className="nav">
-          <span className="nav__connected">접속자 : {this.state.count}명</span>
+          { user.name === 'JunilHwang' ? <a href="#!" className="nav__group--button">그룹핑</a> : null }
+          <span className="nav__connected" onClick={(e: any) => setLayer(e, 'UserList')}>접속자 : {this.state.count}명</span>
           <a className="nav__logout" href="#!" onClick={logout}><FaSignOutAlt /></a>
         </nav>
       </header>

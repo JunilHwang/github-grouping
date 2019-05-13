@@ -4,13 +4,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
 import './assets/scss/common.scss'
-import { socketEmit } from 'Utils/socket';
-
-socketEmit('in', null)
-
-window.onunload = (e: any) => {
-  socketEmit('out', null)
-}
 
 ReactDOM.render(
   <Provider>

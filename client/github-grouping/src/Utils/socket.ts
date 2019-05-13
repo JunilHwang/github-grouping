@@ -7,7 +7,7 @@ export const socketOn = (name: string, callback: Function) => {
   socket.on(name, callback)
 }
 
-export const socketEmit = (name: string, data: any) => {
+export const socketEmit = (name: string, data: any = null) => {
   socket.emit(name, data)
 }
 

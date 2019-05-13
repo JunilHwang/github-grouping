@@ -36,7 +36,6 @@ export default class ChattingList extends Component<Props> {
   render () {
     const { list } = this.props.chatStore!
     const { user } = this.props.userStore!
-    console.log(user)
     return (
       <section className="chat-list" ref={this.chatList}>
         {list.map(({writer, msg, reg_date}: Message, k: number) => (

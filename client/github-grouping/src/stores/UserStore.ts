@@ -1,9 +1,10 @@
 import { observable, action } from 'mobx'
-import { IRootStore } from './index'
+import { RootStore } from './index'
 import { asyncAction } from 'mobx-utils'
 import { $pre } from 'Utils'
 import axios from 'axios'
 import autobind from 'autobind-decorator';
+import { socketEmit } from 'Utils/socket';
 
 export interface IUserStore {
   user: any,
@@ -13,9 +14,9 @@ export interface IUserStore {
 
 @autobind
 export default class UserStore implements IUserStore {
-  private root: IRootStore
+  private root: RootStore
   @observable public user: any = JSON.parse(localStorage.getItem('user') || 'null')
-  constructor (root: IRootStore) {
+  constructor (root: RootStore) {
     this.root = root
   }
 
@@ -30,6 +31,7 @@ export default class UserStore implements IUserStore {
 
   @action logout = (): void => {
     this.user = null
+    socketEmit('out', null)
     localStorage.removeItem('user')
   }
 }

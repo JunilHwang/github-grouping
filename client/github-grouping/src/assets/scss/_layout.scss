@@ -133,7 +133,10 @@ span.middle{display:inline-block;vertical-align:middle;width:0;height:100%;
 /* nav */
 .nav{position:absolute;right:30px;color:#fff;top:0;bottom:0;display:flex;align-items:center;line-height:1;
   &__logout{color:#aaa;font-size:20px;transition:.3s;}
-  &__connected{margin-right:10px;font-weight:400;}
+  &__connected{margin-right:20px;font-weight:400;}
+  &__group--button{margin-right:20px;font-weight:400;padding:10px 20px;background:#09F;color:#fff;border-radius:3px;transition:.3s;
+    &:hover{background:#06F;}
+  }
 }
 
 /* chat */
@@ -167,3 +170,6 @@ span.middle{display:inline-block;vertical-align:middle;width:0;height:100%;
     }
   }
 }
+
+/* user list */
+.user-list{width:600px;}

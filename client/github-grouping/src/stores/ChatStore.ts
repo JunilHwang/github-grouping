@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx'
-import { IRootStore } from 'stores';
+import { RootStore } from 'stores';
+import autobind from 'autobind-decorator';
 
 export interface Message {
   writer: any
@@ -12,10 +13,11 @@ export interface IChatStore {
   post(chat: Message): void
 }
 
+@autobind
 export default class ChatStore {
-  private root: IRootStore
+  private root: RootStore
   @observable public list: Message[] = JSON.parse(localStorage.getItem('chatList') || 'null') || []
-  constructor (root: IRootStore) {
+  constructor (root: RootStore) {
     this.root = root
   }
 
