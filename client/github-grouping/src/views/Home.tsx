@@ -63,8 +63,8 @@ export default class Home extends Component<Props> {
         <Switch>
           <Route path="/group" component={Grouping} />
           <Route path="/guide/:step" component={Guide} />
-          <Route exact path="/chat/:id" component={Chatting} />
           <Route exact path="/" component={Chatting} />
+          <Route exact path="/chat/:room" component={Chatting} />
         </Switch>
       </section>
     )

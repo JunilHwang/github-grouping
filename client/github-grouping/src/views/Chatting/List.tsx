@@ -4,10 +4,12 @@ import { IChatStore, Message } from 'stores/ChatStore';
 import { getToday } from 'Utils'
 import { IUserStore } from 'stores/UserStore';
 import { socketOn } from 'Utils/socket'
+import { match } from 'react-router';
 
 type Props = {
   chatStore?: IChatStore
   userStore?: IUserStore
+  match?: match<any>
 }
 @inject('chatStore', 'userStore')
 @observer
@@ -20,12 +22,12 @@ export default class ChattingList extends Component<Props> {
       if (sh - st - ch < 500) this.scrollSet()
     }
   }
-  componentDidMount() {
+  async componentDidMount() {
+    const { post, get } = this.props.chatStore!
+    const { room } = this.props.match!.params
+    await get(room)
+    socketOn('chat', post)
     this.scrollSet()
-    const { post } = this.props.chatStore!
-    socketOn('chat', (msg: Message) => {
-      post(msg)
-    })
   }
   scrollSet() {
     const target = this.chatList.current

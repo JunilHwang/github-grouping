@@ -13,8 +13,8 @@ export interface IUserStore {
   login(code: string): AsyncIterableIterator<any>
   logout(): void
   setUserList(userList: any[]): void
-  setSuffled(): void
-  resetSuffled(): void
+  setSuffled(): AsyncIterableIterator<any>
+  resetSuffled(): AsyncIterableIterator<any>
 }
 
 @autobind
@@ -22,7 +22,7 @@ export default class UserStore implements IUserStore {
   private root: RootStore
   @observable public user: any = JSON.parse(localStorage.getItem('user') || 'null')
   @observable public userList: any = []
-  @observable public suffled: any[] = JSON.parse(localStorage.getItem('suffled') || 'null') || []
+  @observable public suffled: any[] = []
   constructor (root: RootStore) {
     this.root = root
   }
@@ -46,16 +46,19 @@ export default class UserStore implements IUserStore {
     this.userList = userList
   }
 
-  @action setSuffled (): void {
+  @asyncAction async *getSuffled () {
+    this.suffled = JSON.parse(yield $pre(axios.post('/api/group')))
+  }
+
+  @asyncAction async *setSuffled () {
     const userList = this.userList
-    const duplicated = [...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList, ...userList]
-    const suffled = shuffle(duplicated)
-    localStorage.setItem('suffled', JSON.stringify(suffled))
+    const suffled = shuffle(userList)
+    yield $pre(axios.post('/api/group', { data: JSON.stringify(suffled) }))
     this.suffled = suffled
   }
   
-  @action resetSuffled (): void {
-    localStorage.setItem('suffled', '[]')
+  @asyncAction async *resetSuffled () {
     this.suffled = []
+    yield $pre(axios.post('/api/group/reset'))
   }
 }

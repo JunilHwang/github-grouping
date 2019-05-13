@@ -36,9 +36,10 @@ export default class Profile extends Component<Props> {
           <p className="profile__bio">{user.bio}</p>
         </div>
         <nav className="nav">
-          <Link to="/" className="nav__button">채팅</Link>
-          { user.name === 'JunilHwang' ? <Link to="/group" className="nav__button">그룹핑</Link> : null }
-          <span className="nav__connected" onClick={(e: any) => setLayer(e, 'UserList')}>접속자 : {userList.length}명</span>
+          <Link className="nav__link" to="/chat/0">채팅</Link>
+          <Link className="nav__link" to="/group">그룹</Link>
+          <Link className="nav__link" to="/guide/1">가이드</Link>
+          <span className="nav__link" onClick={(e: any) => setLayer(e, 'UserList')}>접속자 : {userList.length}명</span>
           <a className="nav__logout" href="#!" onClick={logout}><FaSignOutAlt /></a>
         </nav>
       </header>
