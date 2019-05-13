@@ -7,15 +7,18 @@ import autobind from 'autobind-decorator';
 import { socketEmit } from 'Utils/socket';
 
 export interface IUserStore {
-  user: any,
+  user: any
+  userList: any[]
   login(code: string): AsyncIterableIterator<any>
   logout(): void
+  setUserList(userList: any[]): void
 }
 
 @autobind
 export default class UserStore implements IUserStore {
   private root: RootStore
   @observable public user: any = JSON.parse(localStorage.getItem('user') || 'null')
+  @observable public userList: any = []
   constructor (root: RootStore) {
     this.root = root
   }
@@ -33,5 +36,9 @@ export default class UserStore implements IUserStore {
     this.user = null
     socketEmit('out', null)
     localStorage.removeItem('user')
+  }
+
+  @action setUserList = (userList: any[]): void => {
+    this.userList = userList
   }
 }

@@ -6,9 +6,8 @@ import stores from './stores';
 import { socketEmit } from 'Utils/socket';
 import Layer from './views/Layer'
 
-socketEmit('in', null)
-window.onunload = (e: any) => {
-  socketEmit('out', null)
+window.onunload = () => {
+  socketEmit('out.user', stores.userStore.user.id)
 }
 const App: React.FC = () => {
   return (
