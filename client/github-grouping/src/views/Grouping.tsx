@@ -12,7 +12,11 @@ type Props = {
 @observer
 @autobind
 export default class Grouping extends Component<Props> {
-  render () {
+  componentDidMount() {
+    const { getSuffled } = this.props.userStore!
+    getSuffled()
+  }
+  render() {
     const { user, suffled, setSuffled, resetSuffled } = this.props.userStore!
     return (
       <div className="grouping-wrap">

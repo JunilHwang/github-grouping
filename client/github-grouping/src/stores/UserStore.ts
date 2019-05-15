@@ -13,6 +13,7 @@ export interface IUserStore {
   login(code: string): AsyncIterableIterator<any>
   logout(): void
   setUserList(userList: any[]): void
+  getSuffled(): AsyncIterableIterator<any>
   setSuffled(): AsyncIterableIterator<any>
   resetSuffled(): AsyncIterableIterator<any>
 }
@@ -47,18 +48,19 @@ export default class UserStore implements IUserStore {
   }
 
   @asyncAction async *getSuffled () {
-    this.suffled = JSON.parse(yield $pre(axios.post('/api/group')))
+    const data = yield $pre(axios.get('/api/group'))
+    this.suffled = data
   }
 
   @asyncAction async *setSuffled () {
     const userList = this.userList
     const suffled = shuffle(userList)
-    yield $pre(axios.post('/api/group', { data: JSON.stringify(suffled) }))
-    this.suffled = suffled
+    //yield axios.post('/api/group', { suffled })
+    this.suffled = yield suffled
   }
   
   @asyncAction async *resetSuffled () {
-    this.suffled = []
-    yield $pre(axios.post('/api/group/reset'))
+    this.suffled = yield []
+    //yield axios.post('/api/group/reset')
   }
 }
